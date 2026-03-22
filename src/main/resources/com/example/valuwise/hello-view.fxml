@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.valuwise.HelloController">
+    <children>
+        <BorderPane VBox.vgrow="ALWAYS">
+            <top>
+                <Pane fx:id="bannerPane" prefHeight="200.0" prefWidth="700.0" BorderPane.alignment="CENTER" />
+            </top>
+            <center>
+                <TabPane style="-fx-background-color: #ffffff;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                    <tabs>
+                        <Tab text="Araba Değerle">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                        <Tab text="Konut Değerle">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                        <Tab text="Diğer Eşyaları Değerle">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+
+                    </tabs>
+                </TabPane>
+            </center>
+        </BorderPane>
+    </children>
+</VBox>
