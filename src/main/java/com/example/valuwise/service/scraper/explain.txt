@@ -1,0 +1,1 @@
+Veri Çekme Stratejileri, buraya başka platformlardan çekilen verilerin kodları yazılacak.
