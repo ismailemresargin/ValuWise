@@ -20,8 +20,14 @@
                 <children>
                     <Label text="İlan Başlığı:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <TextField fx:id="ilanBasligiField" promptText="Örn: Sahibinden Acil..." GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <Label text="Şehir / İlçe / Mahalle:" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-                    <TextField fx:id="houseLocationField" promptText="Örn: Trabzon / Ortahisar" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+
+                    <Label text="Şehir / İlçe:" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                    <HBox spacing="10.0" GridPane.columnIndex="4" GridPane.rowIndex="0">
+                        <children>
+                            <ComboBox fx:id="cityComboBox" promptText="İl Seçiniz" prefWidth="135.0" />
+                            <ComboBox fx:id="districtComboBox" promptText="İlçe Seçiniz" prefWidth="135.0" disable="true" />
+                        </children>
+                    </HBox>
 
                     <Label text="Net Metrekare (m²):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <TextField fx:id="houseAreaField" promptText="Örn: 135" GridPane.columnIndex="1" GridPane.rowIndex="1" />
