@@ -34,5 +34,14 @@
     </dependencies>
     <build>
         <sourceDirectory>src</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src</directory>
+                <includes>
+                    <include>**/*.fxml</include>
+                    <include>**/*.json</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>
