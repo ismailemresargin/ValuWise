@@ -11,10 +11,10 @@
             <Label text="Telefon Değeri Hesaplama İçin Veri Girişi" textFill="#2c3e50"><font><Font name="System Bold" size="18.0" /></font></Label>
             <GridPane hgap="15.0" vgap="15.0">
                 <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="170.0" />
                     <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="250.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="10.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="20.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="170.0" />
                     <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="250.0" />
                 </columnConstraints>
                 <children>
@@ -22,20 +22,35 @@
                     <TextField fx:id="phoneBrandField" promptText="iPhone, Samsung vb." GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     <Label text="Model:" GridPane.columnIndex="3" GridPane.rowIndex="0" />
                     <TextField fx:id="phoneModelField" promptText="15 Pro Max" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+
                     <Label text="Depolama:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <TextField fx:id="phoneStorageField" promptText="128 GB" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Label text="RAM:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                    <TextField fx:id="phoneRamField" promptText="8 GB" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                    <Label text="Kutusu/Faturası Var mı:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                    <TextField fx:id="phoneKFField" promptText="8 GB" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+
                     <Label text="Pil Sağlığı:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                     <TextField fx:id="phoneBatteryField" promptText="\%90" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <Label text="Garanti:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                     <TextField fx:id="phoneWarrantyField" promptText="12 Ay" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                    <Label text="Ekran:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <TextField fx:id="phoneScreenField" promptText="Orijinal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                    <Label text="Kasa:" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+
+                    <Label text="İmei Kaydı Var mı:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField fx:id="phoneKayitField" promptText="Var/Yok" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Label text="Kozmetik Hasar Durumu:" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                     <TextField fx:id="phoneCosmeticField" promptText="Sıfır Ayarında" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+
+                    <Label text="Cihaz Yaşı:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <TextField fx:id="phoneYasField" promptText="Ay olarak Giriniz" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <Label text="Tamir Gördü mü:" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                    <TextField fx:id="phoneTamirField" promptText="Ön Kamera Değişti" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+
+                    <Label text="Ekran Boyutu:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <TextField fx:id="phoneEkranField" promptText="INC Cinsinden Yazın" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <Label text="Arka Kamera Kaç MP:" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                    <TextField fx:id="phoneArkaCamField" promptText="MP Cinsinden Yazın" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+
+                    <Label text="Ön Kamera Kaç MP:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                    <TextField fx:id="phoneOnCamField" promptText="MP Cinsinden Yazın" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 </children>
-                <rowConstraints><RowConstraints /><RowConstraints /><RowConstraints /><RowConstraints /></rowConstraints>
             </GridPane>
             <Separator prefWidth="200.0" />
             <HBox alignment="CENTER" spacing="15.0">
