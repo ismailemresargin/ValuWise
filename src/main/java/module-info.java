@@ -9,4 +9,6 @@ module com.example.valuwise {
 
     opens com.example.valuwise to javafx.fxml;
     exports com.example.valuwise;
+    requires com.fasterxml.jackson.databind;
+    opens com.example.valuwise.controller to javafx.fxml;
 }
