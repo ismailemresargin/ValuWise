@@ -1,0 +1,1 @@
+Fiyatlandırma Stratejileri klasörü bu, buraya fiyatlandırma için gerekli fonksiyonlar yazılacak.

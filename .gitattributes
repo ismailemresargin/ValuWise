@@ -1,0 +1,6 @@
+# Varsayılan olarak tüm dosyalar LF ile saklansın
+* text=auto eol=lf
+
+# Windows’a özel dosyalar CRLF ile saklansın
+*.bat text eol=crlf
+*.cmd text eol=crlf
