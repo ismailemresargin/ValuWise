@@ -1,0 +1,4 @@
+model klasörü içindeki .java uzantılı dosyalara yani sınıf dosyalarına:
+nesneleri oluşturacağımız sınıfları, 
+bu nesnelerin tüm özelliklerini
+bu verilere erişmemizi sağlayan metodları-fonksiyonları ekleyeceğiz.
