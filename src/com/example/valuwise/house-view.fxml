@@ -71,8 +71,13 @@
             <Separator prefWidth="200.0" />
             <HBox alignment="CENTER" spacing="15.0">
                 <children>
+<<<<<<< HEAD
                     <Button fx:id="calculateButton1" defaultButton="true" onAction="#onCalculateButtonClick" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-background-radius: 8;" text="KONUT DEĞERİ HESAPLA"><font><Font name="System Bold" size="14.0" /></font></Button>
                     <Button fx:id="clearButton1" onAction="#onClearButtonClick" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #bdc3c7; -fx-text-fill: #2c3e50; -fx-background-radius: 8;" text="FORMU SIFIRLA" />
+=======
+                    <Button fx:id="calculateButton1" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-background-radius: 8;" text="KONUT DEĞERİ HESAPLA"><font><Font name="System Bold" size="14.0" /></font></Button>
+                    <Button fx:id="clearButton1" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #bdc3c7; -fx-text-fill: #2c3e50; -fx-background-radius: 8;" text="FORMU SIFIRLA" />
+>>>>>>> origin/huseyn
                 </children>
             </HBox>
             <Label fx:id="houseResultLabel" alignment="CENTER" maxWidth="Infinity" text="Tahmini Değer: -- ₺" textFill="#2980b9"><font><Font name="System Bold" size="20.0" /></font></Label>

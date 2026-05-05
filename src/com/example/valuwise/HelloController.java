@@ -10,6 +10,7 @@ public class HelloController {
 
     @FXML private ComboBox<String> cityComboBox;
     @FXML private ComboBox<String> districtComboBox;
+<<<<<<< HEAD
 
     @FXML
     public void initialize() {
@@ -46,6 +47,31 @@ public class HelloController {
     }
 
     @FXML
+=======
+    @FXML
+    public void initialize() {
+        cityComboBox.getItems().addAll(SehirVerileri.getIller());
+        districtComboBox.setDisable(true);
+
+        cityComboBox.setOnAction(event -> {
+            String secilenSehir = cityComboBox.getValue();
+            if (secilenSehir != null) {
+                districtComboBox.getItems().clear();
+
+                //ilce yaziniz i tekrar ekle
+                districtComboBox.getItems().add("İlçe Seçiniz");
+
+                // yeni ile gore ilceleri yukle
+                districtComboBox.getItems().addAll(SehirVerileri.getIlceler(secilenSehir));
+
+                // yazının varsayılan olarak secili gelmesini sağla
+                districtComboBox.getSelectionModel().select(0);
+
+                districtComboBox.setDisable(false);
+            }
+        });
+    }
+>>>>>>> origin/huseyn
     protected void onCalculateButtonClick() {
         try {
             House yeniEv = new House(
@@ -65,6 +91,7 @@ public class HelloController {
             houseResultLabel.setText("Hata: Verileri kontrol edin!");
         }
     }
+<<<<<<< HEAD
 
     //formu sifirla butonu
     @FXML
@@ -96,4 +123,6 @@ public class HelloController {
         // imleci en bastaki kutuya yonlendiriyoruz
         ilanBasligiField.requestFocus();
     }
+=======
+>>>>>>> origin/huseyn
 }
