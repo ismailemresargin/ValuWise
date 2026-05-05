@@ -10,7 +10,7 @@ public class HelloController {
 
     @FXML private ComboBox<String> cityComboBox;
     @FXML private ComboBox<String> districtComboBox;
-
+//try
     @FXML
     public void initialize() {
         //sehir hanesu
