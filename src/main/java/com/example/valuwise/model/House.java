@@ -13,9 +13,15 @@ public class House extends Asset {
     private boolean denizManzarasiVarMi;
     private boolean depremeDayanikliMi;
 
+    // yeni ekledigim veriler
+    private boolean balkonVarMi;
+    private boolean krediyeUygunMu;
+    private String isinmaTipi;
+
     public House(String id, String ilanBasligi, String adres, double metrekare, int odaSayisi, int banyoSayisi,
                  int binaYasi, int bulunduguKat, boolean asansorVarMi, boolean otoparkVarMi,
-                 boolean denizManzarasiVarMi, boolean depremeDayanikliMi) {
+                 boolean denizManzarasiVarMi, boolean depremeDayanikliMi,
+                 boolean balkonVarMi, boolean krediyeUygunMu, String isinmaTipi) {
         super(id);
         this.ilanBasligi = ilanBasligi;
         this.adres = adres;
@@ -28,6 +34,9 @@ public class House extends Asset {
         this.otoparkVarMi = otoparkVarMi;
         this.denizManzarasiVarMi = denizManzarasiVarMi;
         this.depremeDayanikliMi = depremeDayanikliMi;
+        this.balkonVarMi = balkonVarMi;
+        this.krediyeUygunMu = krediyeUygunMu;
+        this.isinmaTipi = isinmaTipi;
     }
 
     // Getters
@@ -39,6 +48,9 @@ public class House extends Asset {
     public boolean isOtoparkVarMi() { return otoparkVarMi; }
     public boolean isAsansorVarMi() { return asansorVarMi; }
     public boolean isDepremeDayanikliMi() { return depremeDayanikliMi; }
+    public boolean isBalkonVarMi() { return balkonVarMi; }
+    public boolean isKrediyeUygunMu() { return krediyeUygunMu; }
+    public String getIsinmaTipi() { return isinmaTipi; }
 
     @Override
     public void tahminiDegerHesapla() { /* Boş bırakılabilir */ }

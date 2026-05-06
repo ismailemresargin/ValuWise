@@ -15,7 +15,6 @@ public class HousePricingEngine {
 
         double yipranmaPayi = (house.getBinaYasi() * 0.01) * tabanFiyat;
         tabanFiyat -= yipranmaPayi;
-
         house.setTahminiDeger(tabanFiyat);
         return tabanFiyat;
     }

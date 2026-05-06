@@ -42,12 +42,25 @@
                     <Label text="Bulunduğu Kat:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                     <TextField fx:id="houseFloorField" promptText="Örn: 4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     <Label text="Isınma Tipi:" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                    <TextField fx:id="houseHeatingField" promptText="Doğalgaz, Merkezi vb." GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                    <ComboBox fx:id="houseHeatingComboBox" promptText="Seçiniz" prefWidth="135.0" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
 
                     <Label text="Krediye Uygunluk:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                    <TextField fx:id="houseCreditStatusField" promptText="Evet / Hayır" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <HBox alignment="CENTER_LEFT" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <fx:define>
+                            <ToggleGroup fx:id="krediGroup"/>
+                        </fx:define>
+                        <RadioButton fx:id="radioKrediVar" text="Var" toggleGroup="$krediGroup" />
+                        <RadioButton fx:id="radioKrediYok" text="Yok" toggleGroup="$krediGroup" />
+                    </HBox>
+
                     <Label text="Balkon / Teras:" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                    <TextField fx:id="houseBalconyField" promptText="Örn: 2 Balkonlu" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                    <HBox alignment="CENTER_LEFT" spacing="15.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                        <fx:define>
+                            <ToggleGroup fx:id="balkonGroup"/>
+                        </fx:define>
+                        <RadioButton fx:id="radioBalkonVar" text="Var" toggleGroup="$balkonGroup" />
+                        <RadioButton fx:id="radioBalkonYok" text="Yok" toggleGroup="$balkonGroup" />
+                    </HBox>
 
                     <Label text="Ekstra Özellikler:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                     <HBox spacing="15.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5">
