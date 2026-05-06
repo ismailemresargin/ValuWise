@@ -15,12 +15,23 @@ public class HouseController {
     @FXML private ComboBox<String> districtComboBox;
     @FXML
     public void initialize() {
+        //sehir hanesu
+        cityComboBox.getItems().clear();
+        cityComboBox.getItems().add("İl Seçiniz");
         cityComboBox.getItems().addAll(SehirVerileri.getIller());
+        cityComboBox.getSelectionModel().select(0); // İlk açılışta "İl Seçiniz" seçili gelsin
+
+        // ilce hanesi
+        districtComboBox.getItems().clear();
+        districtComboBox.getItems().add("İlçe Seçiniz");
+        districtComboBox.getSelectionModel().select(0);
         districtComboBox.setDisable(true);
 
+        // sehir secildiginde
         cityComboBox.setOnAction(event -> {
             String secilenSehir = cityComboBox.getValue();
-            if (secilenSehir != null) {
+            // eger "İl Seçiniz" disinda gercek bir sehir secildiyse:
+            if (secilenSehir != null && !secilenSehir.equals("İl Seçiniz")) {
                 districtComboBox.getItems().clear();
 
                 //ilce yaziniz i tekrar ekle
@@ -33,6 +44,12 @@ public class HouseController {
                 districtComboBox.getSelectionModel().select(0);
 
                 districtComboBox.setDisable(false);
+            } else {
+                // eger tekrar "İl Seçiniz"e dönülürse ilceyi kilitle
+                districtComboBox.getItems().clear();
+                districtComboBox.getItems().add("İlçe Seçiniz");
+                districtComboBox.getSelectionModel().select(0);
+                districtComboBox.setDisable(true);
             }
         });
     }
@@ -55,5 +72,36 @@ public class HouseController {
         } catch (Exception e) {
             houseResultLabel.setText("Hata: Verileri kontrol edin!");
         }
+    }
+
+    //formu sifirla butonu
+    @FXML
+    protected void onClearButtonClick() {
+        // tum metin kutularini temizliyoruz
+        ilanBasligiField.clear();
+        houseAreaField.clear();
+        houseRoomsField.clear();
+        houseBathroomsField.clear();
+        houseAgeField.clear();
+
+        // tum tikleri kaldiriyoruz
+        checkDenizManzarasi.setSelected(false);
+        checkOtopark.setSelected(false);
+        checkAsansor.setSelected(false);
+        checkDeprem.setSelected(false);
+
+        // sehir ve ilce secimini sifirla
+        cityComboBox.getSelectionModel().select(0);
+
+        districtComboBox.getItems().clear();
+        districtComboBox.getItems().add("İlçe Seçiniz");
+        districtComboBox.getSelectionModel().select(0);
+        districtComboBox.setDisable(true);
+
+        // alttaki yaziyi eski haline getiriyoruz
+        houseResultLabel.setText("Tahmini Değer: -- ₺");
+
+        // imleci en bastaki kutuya yonlendiriyoruz
+        ilanBasligiField.requestFocus();
     }
 }
