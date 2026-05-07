@@ -18,8 +18,8 @@
                     <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="275.0" />
                 </columnConstraints>
                 <children>
-                    <Label text="İlan Başlığı:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="ilanBasligiField" promptText="Örn: Sahibinden Acil..." GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label text="Konut Tipi:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox fx:id="konutTipiComboBox" promptText="Seçiniz" prefWidth="275.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                     <Label text="Şehir / İlçe:" GridPane.columnIndex="3" GridPane.rowIndex="0" />
                     <HBox spacing="10.0" GridPane.columnIndex="4" GridPane.rowIndex="0">
