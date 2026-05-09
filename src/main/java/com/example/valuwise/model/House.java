@@ -3,6 +3,7 @@ package com.example.valuwise.model;
 public class House extends Asset {
     private String konutTipi;
     private String adres;
+    private String ilce;
     private double metrekare;
     private int odaSayisi;
     private int banyoSayisi;
@@ -25,6 +26,7 @@ public class House extends Asset {
         super(id);
         this.konutTipi = konutTipi;
         this.adres = adres;
+        this.ilce = ilce;
         this.metrekare = metrekare;
         this.odaSayisi = odaSayisi;
         this.banyoSayisi = banyoSayisi;
@@ -54,6 +56,7 @@ public class House extends Asset {
     public boolean isBalkonVarMi() { return balkonVarMi; }
     public boolean isKrediyeUygunMu() { return krediyeUygunMu; }
     public String getIsinmaTipi() { return isinmaTipi; }
+    public String getIlce() { return ilce; }
 
     @Override
     public void tahminiDegerHesapla() { /* Boş bırakılabilir */ }

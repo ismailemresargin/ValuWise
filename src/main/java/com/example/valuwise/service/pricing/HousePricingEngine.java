@@ -1,20 +1,21 @@
 package com.example.valuwise.service.pricing;
 
 import com.example.valuwise.model.House;
+import com.example.valuwise.util.BolgeFiyatManager;
 
 public class HousePricingEngine {
     public double tahminiDegerHesapla(House house) {
         // konut tipine gore baslangic m2 fiyati (baz fiyat)
-        double m2BirimFiyati = 25000; // standart daire baz fiyati
+        double m2BirimFiyati = BolgeFiyatManager.getBirimFiyat(house.getAdres(), house.getIlce()); // standart daire baz fiyati
 
         switch (house.getKonutTipi()) {
-            case "Villa": m2BirimFiyati = 55000; break;
-            case "Yalı / Yalı Dairesi": m2BirimFiyati = 120000; break;
-            case "Rezidans": m2BirimFiyati = 45000; break;
-            case "Müstakil Ev": m2BirimFiyati = 35000; break;
-            case "Gecekondu": m2BirimFiyati = 12000; break;
-            case "Prefabrik Ev": m2BirimFiyati = 15000; break;
-            default: m2BirimFiyati = 25000; break;
+            case "Villa": m2BirimFiyati *= 2.2; break;
+            case "Yalı / Yalı Dairesi": m2BirimFiyati *= 4.5; break;
+            case "Rezidans": m2BirimFiyati *= 1.5; break;
+            case "Müstakil Ev": m2BirimFiyati *= 1.3; break;
+            case "Gecekondu": m2BirimFiyati *= 0.5; break;
+            case "Prefabrik Ev": m2BirimFiyati *= 0.6; break;
+            // Daire, yazlik vb. icin carpan 1.0 kalir, lokasyon fiyati neyse o olur.
         }
 
         double tabanFiyat = house.getMetrekare() * m2BirimFiyati;
@@ -36,6 +37,7 @@ public class HousePricingEngine {
         // giris kat ise %10 ucuz, ara katsa (1-5 arasi) %10 pahali
         if (house.getBulunduguKat() == 0) tabanFiyat *= 0.90;
         else if (house.getBulunduguKat() > 0 && house.getBulunduguKat() < 6) tabanFiyat *= 1.10;
+        else if (house.getBulunduguKat() >= 6) tabanFiyat *= 1.15; // 6 ve ustu ekstra degerli
 
         // kredi ve balkon etkisi
         if (house.isKrediyeUygunMu()) tabanFiyat *= 1.08; // krediye uygunluk %8 deger katar

@@ -1,0 +1,12 @@
+{
+  "İstanbul": { "Kadıköy": 85000, "Beşiktaş": 95000, "Esenyurt": 28000, "Şişli": 80000, "Üsküdar": 75000 },
+  "Ankara": { "Çankaya": 55000, "Keçiören": 32000, "Mamak": 25000, "Yenimahalle": 35000, "Etimesgut": 30000 },
+  "İzmir": { "Karşıyaka": 65000, "Konak": 50000, "Bornova": 48000, "Buca": 35000, "Çiğli": 40000 },
+  "Bursa": { "Nilüfer": 35000, "Osmangazi": 28000, "Yıldırım": 24000 },
+  "Antalya": { "Muratpaşa": 42000, "Konyaaltı": 55000, "Kepez": 26000, "Alanya": 45000, "Manavgat": 35000 },
+  "Trabzon": { "Ortahisar": 28000, "Yomra": 24000, "Akçaabat": 22000, "Araklı": 20000, "Sürmene": 19000 },
+  "Konya": { "Selçuklu": 26000, "Meram": 28000, "Karatay": 22000 },
+  "Adana": { "Çukurova": 29000, "Seyhan": 24000, "Sarıçam": 21000, "Yüreğir": 18000 },
+  "Eskişehir": { "Odunpazarı": 27000, "Tepebaşı": 29000, "Sivrihisar": 15000, "Çifteler": 14000 },
+  "Samsun": { "Atakum": 32000, "İlkadım": 25000, "Canik": 21000, "Bafra": 18000 }
+}

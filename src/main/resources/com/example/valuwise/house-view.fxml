@@ -32,15 +32,16 @@
                     <Label text="Net Metrekare (m²):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <TextField fx:id="houseAreaField" promptText="Örn: 135" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <Label text="Oda Sayısı:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                    <TextField fx:id="houseRoomsField" promptText="Örn: 3" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                    <ComboBox fx:id="houseRoomsComboBox" promptText="Seçiniz" prefWidth="135.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
 
                     <Label text="Banyo Sayısı:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <TextField fx:id="houseBathroomsField" promptText="Örn: 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <ComboBox fx:id="houseBathroomsComboBox" promptText="Seçiniz" prefWidth="275.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
                     <Label text="Bina Yaşı:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                    <TextField fx:id="houseAgeField" promptText="Örn: 5" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                    <ComboBox fx:id="houseAgeComboBox" promptText="Seçiniz" prefWidth="135.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
 
                     <Label text="Bulunduğu Kat:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <TextField fx:id="houseFloorField" promptText="Örn: 4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <TextField fx:id="houseFloorField" promptText="Giriş için 0 yazın" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     <Label text="Isınma Tipi:" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                     <ComboBox fx:id="houseHeatingComboBox" promptText="Seçiniz" prefWidth="135.0" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
 
@@ -89,6 +90,7 @@
                 </children>
             </HBox>
             <Label fx:id="houseResultLabel" alignment="CENTER" maxWidth="Infinity" text="Tahmini Değer: -- ₺" textFill="#2980b9"><font><Font name="System Bold" size="20.0" /></font></Label>
+            <Label fx:id="errorLabel" alignment="CENTER" maxWidth="Infinity" text="Hata: Lütfen sayısal alanlara sadece sayı giriniz!" textFill="#e74c3c" visible="false"><font><Font name="System Bold" size="18.0" /></font></Label>
         </children>
     </VBox>
 </ScrollPane>
