@@ -1,123 +1,172 @@
 package com.example.valuwise.controller;
 
 import com.example.valuwise.model.Pc;
+import com.example.valuwise.util.PcVerileri;
 import com.example.valuwise.service.pricing.PcPricingEngine;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class PcController {
-
-    @FXML private ComboBox<String> pcCihazTipiCombo;
-    @FXML private ComboBox<String> pcMarkaCombo;
-    @FXML private ComboBox<String> pcModelAilesiCombo;
-    @FXML private ComboBox<String> pcCihazYasiCombo;
-    @FXML private ComboBox<String> pcIslemciMarkasiCombo;
-    @FXML private ComboBox<String> pcIslemciAilesiCombo;
-    @FXML private ComboBox<String> pcIslemciNesliCombo;
-    @FXML private ComboBox<String> pcEkranKartiCombo;
-    @FXML private ComboBox<String> pcRamKapasitesiCombo;
-    @FXML private ComboBox<String> pcRamTipiCombo;
-    @FXML private ComboBox<String> pcDepolamaKapasitesiCombo;
-    @FXML private ComboBox<String> pcDepolamaTipiCombo;
-    @FXML private ComboBox<String> pcEkranBoyutuCombo;
-
+    @FXML private ComboBox<String> pcCihazTipiCombo, pcMarkaCombo, pcModelAilesiCombo;
+    @FXML private ComboBox<String> pcIslemciMarkasiCombo, pcIslemciAilesiCombo, pcIslemciNesliCombo;
+    @FXML private ComboBox<String> pcRamKapasitesiCombo, pcRamTipiCombo, pcDepolamaKapasitesiCombo, pcDepolamaTipiCombo;
+    @FXML private ComboBox<String> pcEkranKartiCombo, pcEkranBoyutuCombo, pcCihazYasiCombo;
     @FXML private Slider pcBataryaSagligiSlider;
-    @FXML private Label pcBataryaSagligiLabel;
-
-    @FXML private CheckBox pcKozmetikHasarCheck;
-    @FXML private CheckBox pcGarantiCheck;
-
-    @FXML private Label pcResultLabel;
-    @FXML private Label errorLabel;
+    @FXML private Label pcBataryaSagligiLabel, pcResultLabel, errorLabel;
+    @FXML private CheckBox pcKozmetikHasarCheck, pcGarantiCheck;
 
     @FXML
     public void initialize() {
-        // --- Combobox Verilerini Doldurma ---
-        pcCihazTipiCombo.getItems().addAll("Seçiniz", "Masaüstü", "Dizüstü (Laptop)");
-        pcMarkaCombo.getItems().addAll("Seçiniz", "Asus", "Apple", "Lenovo", "HP", "MSI", "Dell", "Monster", "Toplama/Diğer");
-        pcModelAilesiCombo.getItems().addAll("Seçiniz", "ROG/Legion/Alienware", "TUF/Victus/Ideapad", "ThinkPad/EliteBook", "MacBook Air", "MacBook Pro", "Standart Ev/Ofis");
+        // Temel Kategoriler
+        pcCihazTipiCombo.getItems().addAll("Seçiniz", "Masaüstü", "Dizüstü");
+        pcCihazTipiCombo.getSelectionModel().select(0);
 
-        pcIslemciMarkasiCombo.getItems().addAll("Seçiniz", "Intel", "AMD", "Apple");
-        pcIslemciAilesiCombo.getItems().addAll("Seçiniz", "Core i3", "Core i5", "Core i7", "Core i9", "Ryzen 3", "Ryzen 5", "Ryzen 7", "Ryzen 9", "M1/M2/M3", "M1/M2/M3 Pro", "M1/M2/M3 Max");
-        pcIslemciNesliCombo.getItems().addAll("Seçiniz", "Apple (Nesilsiz)", "14. Nesil (En Yeni)", "13. Nesil", "12. Nesil", "10-11. Nesil", "9. Nesil ve altı");
+        // Veri Sınıfından Yüklemeler
+        pcMarkaCombo.getItems().add("Marka Seçiniz");
+        pcMarkaCombo.getItems().addAll(PcVerileri.getMarkalar());
+        pcMarkaCombo.getSelectionModel().select(0);
 
-        pcEkranKartiCombo.getItems().addAll("Seçiniz", "Dahili (Intel/Radeon)", "RTX 4070/4080/4090", "RTX 4050/4060", "RTX 3060/3070/3080", "RTX 3050", "RTX 2060/2070", "GTX 1650/1660", "Radeon RX Serisi");
+        pcIslemciMarkasiCombo.getItems().add("Üretici Seçiniz");
+        pcIslemciMarkasiCombo.getItems().addAll(PcVerileri.getCpuMarkalar());
+        pcIslemciMarkasiCombo.getSelectionModel().select(0);
 
-        pcRamKapasitesiCombo.getItems().addAll("Seçiniz", "4", "8", "16", "32", "64", "128");
-        pcRamTipiCombo.getItems().addAll("Seçiniz", "DDR3", "DDR4", "DDR5", "LPDDR5 (Lehimli)");
+        pcEkranKartiCombo.getItems().addAll(PcVerileri.getEkranKartlari());
 
-        pcDepolamaKapasitesiCombo.getItems().addAll("Seçiniz", "128", "256", "512", "1024", "2048");
-        pcDepolamaTipiCombo.getItems().addAll("Seçiniz", "HDD (Mekanik)", "SATA SSD", "NVMe M.2 SSD");
+        // Diğer Sabitler
+        setupConstantCombos();
 
-        pcEkranBoyutuCombo.getItems().addAll("Seçiniz", "Yok (Kasa)", "13.3", "14.0", "15.6", "16.1", "17.3");
+        // --- Dinamik Dinleyiciler (Genele Yayılmış Mantık) ---
 
-        pcCihazYasiCombo.getItems().addAll("Seçiniz", "0 (Sıfır)", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10+");
-
-        // Varsayılan seçimler
-        sifirlaForm();
-
-        // --- Dinamik Kontroller (Listeners) ---
-
-        // Batarya Slider Etiketi
-        pcBataryaSagligiSlider.setMin(0); pcBataryaSagligiSlider.setMax(100); pcBataryaSagligiSlider.setValue(90);
-        pcBataryaSagligiSlider.valueProperty().addListener((obs, oldVal, newVal) ->
-                pcBataryaSagligiLabel.setText(newVal.intValue() + "%")
-        );
-
-        // Cihaz Tipi Masaüstü seçilirse, bataryayı ve ekran boyutunu kilitle
-        pcCihazTipiCombo.setOnAction(e -> {
-            String tip = pcCihazTipiCombo.getValue();
-            if ("Masaüstü".equals(tip)) {
-                pcBataryaSagligiSlider.setValue(100);
-                pcBataryaSagligiSlider.setDisable(true);
-                pcEkranBoyutuCombo.getSelectionModel().select("Yok (Kasa)");
-                pcEkranBoyutuCombo.setDisable(true);
+        // Marka -> Model Bağımlılığı
+        pcMarkaCombo.setOnAction(e -> {
+            String marka = pcMarkaCombo.getValue();
+            pcModelAilesiCombo.getItems().clear();
+            pcModelAilesiCombo.getItems().add("Model Seçiniz");
+            if (marka != null && !marka.equals("Marka Seçiniz")) {
+                pcModelAilesiCombo.getItems().addAll(PcVerileri.getModeller(marka));
+                pcModelAilesiCombo.setDisable(false);
             } else {
-                pcBataryaSagligiSlider.setDisable(false);
-                pcEkranBoyutuCombo.setDisable(false);
-                pcEkranBoyutuCombo.getSelectionModel().select("Seçiniz");
+                pcModelAilesiCombo.setDisable(true);
+            }
+            pcModelAilesiCombo.getSelectionModel().select(0);
+        });
+
+        // İşlemci Marka -> Aile VE NESİL Bağımlılığı
+        pcIslemciMarkasiCombo.setOnAction(e -> {
+            String cpuMarka = pcIslemciMarkasiCombo.getValue();
+
+            // Aile kutusunu sıfırla
+            pcIslemciAilesiCombo.getItems().clear();
+            pcIslemciAilesiCombo.getItems().add("Aile Seçiniz");
+
+            // Nesil kutusunu sıfırla
+            pcIslemciNesliCombo.getItems().clear();
+            pcIslemciNesliCombo.getItems().add("Nesil/Seri Seçiniz");
+
+            if (cpuMarka != null && !cpuMarka.equals("Üretici Seçiniz")) {
+                // Aileleri Doldur
+                pcIslemciAilesiCombo.getItems().addAll(PcVerileri.getCpuAileleri(cpuMarka));
+                pcIslemciAilesiCombo.setDisable(false);
+
+                // Nesilleri Doldur (Intel ise Nesil, AMD ise Seri gelecek)
+                pcIslemciNesliCombo.getItems().addAll(PcVerileri.getCpuNesilleri(cpuMarka));
+                pcIslemciNesliCombo.setDisable(false);
+
+                // Apple seçildiyse nesli otomatik doldur ve kilitle
+                if (cpuMarka.equals("Apple")) {
+                    pcIslemciNesliCombo.getSelectionModel().select(1); // "Apple Silicon"u seçer
+                    pcIslemciNesliCombo.setDisable(true);
+                }
+            } else {
+                pcIslemciAilesiCombo.setDisable(true);
+                pcIslemciNesliCombo.setDisable(true);
+            }
+            pcIslemciAilesiCombo.getSelectionModel().select(0);
+            pcIslemciNesliCombo.getSelectionModel().select(0);
+        });
+
+        // Masaüstü Seçilirse Batarya/Ekran Kilitleme (Mini PC mantığı burada çözülüyor)
+        pcCihazTipiCombo.setOnAction(e -> {
+            boolean isDesktop = "Masaüstü".equals(pcCihazTipiCombo.getValue());
+            pcBataryaSagligiSlider.setDisable(isDesktop);
+            pcEkranBoyutuCombo.setDisable(isDesktop);
+            if (isDesktop) {
+                pcBataryaSagligiSlider.setValue(100);
+                pcEkranBoyutuCombo.getSelectionModel().select("Yok (Kasa)");
             }
         });
+
+        pcBataryaSagligiSlider.valueProperty().addListener((obs, old, newVal) ->
+                pcBataryaSagligiLabel.setText(newVal.intValue() + "%"));
+    }
+
+    private void setupConstantCombos() {
+        // Ara RAM değerleri ve yüksek kapasiteler eklendi (DDR5 ile gelen 24/48 vb.)
+        pcRamKapasitesiCombo.getItems().addAll("4", "8", "12", "16", "24", "32", "48", "64", "96", "128", "192", "256");
+        pcRamTipiCombo.getItems().addAll("DDR4", "DDR5", "LPDDR5 (Lehimli)");
+
+        // 4TB ve 8TB depolama eklendi
+        pcDepolamaKapasitesiCombo.getItems().addAll("128", "256", "512", "1024 (1TB)", "2048 (2TB)", "4096 (4TB)", "8192 (8TB+)");
+        pcDepolamaTipiCombo.getItems().addAll("Gen4/Gen5 NVMe SSD", "Standart NVMe SSD", "SATA SSD", "HDD (Mekanik)");
+
+        pcEkranBoyutuCombo.getItems().addAll("Yok (Kasa)", "13.3", "14.0", "15.6", "16.1", "17.3", "18.0");
+        pcCihazYasiCombo.getItems().addAll("0", "1", "2", "3", "4", "5+");
     }
 
     @FXML
     protected void onCalculateButtonClick() {
         errorLabel.setVisible(false);
-        pcResultLabel.setStyle("-fx-text-fill: #8e44ad;");
+        pcResultLabel.setStyle("-fx-text-fill: #8e44ad;"); // Varsayılan mor renk
+
+        // Stil sıfırlama (Her hesaplamada çerçeveleri temizle)
+        ComboBox[] tumCombolar = {
+                pcCihazTipiCombo, pcMarkaCombo, pcModelAilesiCombo, pcIslemciMarkasiCombo,
+                pcIslemciAilesiCombo, pcIslemciNesliCombo, pcRamKapasitesiCombo, pcRamTipiCombo,
+                pcDepolamaKapasitesiCombo, pcDepolamaTipiCombo, pcEkranKartiCombo, pcEkranBoyutuCombo, pcCihazYasiCombo
+        };
+        for (ComboBox c : tumCombolar) c.setStyle("");
 
         try {
-            // Zorunlu alanların kontrolü (Boş mu diye bakıyoruz)
-            if (isInvalid(pcCihazTipiCombo) || isInvalid(pcMarkaCombo) || isInvalid(pcIslemciAilesiCombo) ||
-                    isInvalid(pcRamKapasitesiCombo) || isInvalid(pcDepolamaKapasitesiCombo) || isInvalid(pcCihazYasiCombo)) {
+            boolean bosKutuVar = false;
+
+            // Zorunlu alan kontrolü (isInvalid yardımcı metodunu kullanarak)
+            for (ComboBox c : tumCombolar) {
+                if (isInvalid(c)) {
+                    c.setStyle("-fx-border-color: #d9a400; -fx-border-width: 2px; -fx-border-radius: 3px;");
+                    bosKutuVar = true;
+                }
+            }
+
+            if (bosKutuVar) {
                 throw new IllegalArgumentException("Eksik veri girişi yapıldı!");
             }
 
-            // Sayısal değerleri String'den Çevirme
+            // Veri Dönüştürme (Parse işlemleri)
             int ramKapasite = Integer.parseInt(pcRamKapasitesiCombo.getValue());
-            int depolamaKapasite = Integer.parseInt(pcDepolamaKapasitesiCombo.getValue());
-            int cihazYasi = 0;
-            if (!pcCihazYasiCombo.getValue().equals("10+")) {
-                cihazYasi = Integer.parseInt(pcCihazYasiCombo.getValue().split(" ")[0]);
-            } else {
-                cihazYasi = 10;
-            }
 
-            // Nesil çevirici ("12. Nesil" -> 12)
+            // Depolama: "1024 (1TB)" gibi metinlerden sayısal kısmı al
+            String depolamaRaw = pcDepolamaKapasitesiCombo.getValue().split(" ")[0];
+            int depolamaKapasite = Integer.parseInt(depolamaRaw);
+
+            // Yaş: "5+" gibi metinlerden sayıyı al
+            int cihazYasi = Integer.parseInt(pcCihazYasiCombo.getValue().replace("+", ""));
+
+            // Nesil: "13. Nesil" -> 13 (Apple ise 0)
             int nesil = 0;
-            String secilenNesil = pcIslemciNesliCombo.getValue();
-            if (secilenNesil != null && secilenNesil.contains("Nesil") && !secilenNesil.contains("Apple")) {
-                nesil = Integer.parseInt(secilenNesil.replaceAll("[^0-9]", ""));
+            String nesilStr = pcIslemciNesliCombo.getValue();
+            if (nesilStr.matches(".*\\d.*")) { // İçinde sayı varsa
+                nesil = Integer.parseInt(nesilStr.replaceAll("[^0-9]", ""));
             }
 
-            // Ekran boyutu çevirici
+            // Ekran Boyutu: "15.6 inç" -> 15.6
             double ekranBoyutu = 0.0;
-            if (!pcEkranBoyutuCombo.isDisable() && !isInvalid(pcEkranBoyutuCombo)) {
-                ekranBoyutu = Double.parseDouble(pcEkranBoyutuCombo.getValue());
+            if (!pcEkranBoyutuCombo.isDisable() && !pcEkranBoyutuCombo.getValue().equals("Yok (Kasa)")) {
+                ekranBoyutu = Double.parseDouble(pcEkranBoyutuCombo.getValue().split(" ")[0]);
             }
 
-            // Modeli Oluştur
+            // Pc Nesnesini Oluştur
             Pc yeniPc = new Pc(
-                    "ID-" + System.currentTimeMillis(),
+                    "PC-" + System.currentTimeMillis(),
                     pcCihazTipiCombo.getValue(),
                     pcMarkaCombo.getValue(),
                     pcModelAilesiCombo.getValue(),
@@ -136,37 +185,26 @@ public class PcController {
                     pcGarantiCheck.isSelected()
             );
 
-            // Motoru (Algoritmayı) Çağır
+            // Algoritmayı Çalıştır
             double sonuc = new PcPricingEngine().tahminiDegerHesapla(yeniPc);
             pcResultLabel.setText(String.format("Tahmini Değer: %,.2f ₺", sonuc));
 
         } catch (IllegalArgumentException e) {
-            errorLabel.setText("Lütfen zorunlu seçimleri (Tipi, Ram, Depolama vb.) yapınız!");
-            errorLabel.setVisible(true);
+            pcResultLabel.setText("Hata: Verileri eksiksiz girin!");
+            pcResultLabel.setStyle("-fx-text-fill: #d9a400;"); // Sarı uyarı rengi
         } catch (Exception e) {
-            pcResultLabel.setText("Hata: Hesaplama yapılamadı!");
+            pcResultLabel.setText("Hesaplama Hatası!");
             pcResultLabel.setStyle("-fx-text-fill: red;");
-            e.printStackTrace(); // Hata takibi için
+            errorLabel.setVisible(true);
+            e.printStackTrace();
         }
     }
 
     @FXML
     protected void onClearButtonClick() {
-        sifirlaForm();
-        errorLabel.setVisible(false);
-        pcResultLabel.setText("Tahmini Değer: -- ₺");
-        pcResultLabel.setStyle("-fx-text-fill: #8e44ad;");
-    }
-
-    // Helper metotlar
-    private void sifirlaForm() {
+        // Tüm ComboBox'ları "Seçiniz" durumuna getir
         pcCihazTipiCombo.getSelectionModel().select(0);
-        pcMarkaCombo.getSelectionModel().select(0);
-        pcModelAilesiCombo.getSelectionModel().select(0);
         pcCihazYasiCombo.getSelectionModel().select(0);
-        pcIslemciMarkasiCombo.getSelectionModel().select(0);
-        pcIslemciAilesiCombo.getSelectionModel().select(0);
-        pcIslemciNesliCombo.getSelectionModel().select(0);
         pcEkranKartiCombo.getSelectionModel().select(0);
         pcRamKapasitesiCombo.getSelectionModel().select(0);
         pcRamTipiCombo.getSelectionModel().select(0);
@@ -174,16 +212,51 @@ public class PcController {
         pcDepolamaTipiCombo.getSelectionModel().select(0);
         pcEkranBoyutuCombo.getSelectionModel().select(0);
 
+        // Bağımlı ComboBox'ları sıfırla ve kilitle
+        pcMarkaCombo.getSelectionModel().select(0);
+        pcModelAilesiCombo.getItems().clear();
+        pcModelAilesiCombo.getItems().add("Model Seçiniz");
+        pcModelAilesiCombo.getSelectionModel().select(0);
+        pcModelAilesiCombo.setDisable(true);
+
+        pcIslemciMarkasiCombo.getSelectionModel().select(0);
+        pcIslemciAilesiCombo.getItems().clear();
+        pcIslemciAilesiCombo.getItems().add("Aile Seçiniz");
+        pcIslemciAilesiCombo.getSelectionModel().select(0);
+        pcIslemciAilesiCombo.setDisable(true);
+
+        pcIslemciNesliCombo.getItems().clear();
+        pcIslemciNesliCombo.getItems().add("Nesil/Seri Seçiniz");
+        pcIslemciNesliCombo.getSelectionModel().select(0);
+        pcIslemciNesliCombo.setDisable(true);
+
+        // Checkbox ve Slider sıfırla
         pcKozmetikHasarCheck.setSelected(false);
         pcGarantiCheck.setSelected(false);
-
         pcBataryaSagligiSlider.setValue(90);
         pcBataryaSagligiSlider.setDisable(false);
         pcEkranBoyutuCombo.setDisable(false);
         pcBataryaSagligiLabel.setText("90%");
+
+        // Stil ve Yazıları Sıfırla
+        ComboBox[] tumCombolar = {
+                pcCihazTipiCombo, pcMarkaCombo, pcModelAilesiCombo, pcIslemciMarkasiCombo,
+                pcIslemciAilesiCombo, pcIslemciNesliCombo, pcRamKapasitesiCombo, pcRamTipiCombo,
+                pcDepolamaKapasitesiCombo, pcDepolamaTipiCombo, pcEkranKartiCombo, pcEkranBoyutuCombo, pcCihazYasiCombo
+        };
+        for (ComboBox c : tumCombolar) c.setStyle("");
+
+        pcResultLabel.setText("Tahmini Değer: -- ₺");
+        pcResultLabel.setStyle("-fx-text-fill: #8e44ad;");
+        errorLabel.setVisible(false);
+
+        // Odaklanma
+        pcCihazTipiCombo.requestFocus();
     }
 
     private boolean isInvalid(ComboBox<String> combo) {
-        return combo.getValue() == null || combo.getValue().equals("Seçiniz");
+        if (combo.isDisable()) return false; // Kilitli kutuları kontrol etme (Örn: Masaüstü seçilince ekran boyutu)
+        String v = combo.getValue();
+        return v == null || v.contains("Seçiniz") || v.contains("Üretici");
     }
 }
