@@ -15,12 +15,11 @@ public class Phone extends Asset {
     private int arkaKameraMP;
     private int onKameraMP;
 
-    // Constructor: Asset'ten gelen ID eklendi
-    public Phone(String id, String marka, String model, int depolamaKapasitesi, int pilSagligi, int cihazYasiAy,
+    public Phone(String marka, String model, int depolamaKapasitesi, int pilSagligi, int cihazYasiAy,
                  boolean garantisiVarMi, boolean kutuFaturaVarMi,
                  boolean kozmetikHasarVarMi, boolean tamirGorduMu, boolean imeiKaydiVarMi,
                  double ekranBoyutuInc, int arkaKameraMP, int onKameraMP) {
-        super(id);
+        super("ID-" + System.currentTimeMillis());
         this.marka = marka;
         this.model = model;
         this.depolamaKapasitesi = depolamaKapasitesi;
@@ -36,20 +35,33 @@ public class Phone extends Asset {
         this.onKameraMP = onKameraMP;
     }
 
-    // --- Getter ve Setter Metotları ---
-    public String getMarka() { return marka; }
-    public String getModel() { return model; }
-    public int getDepolamaKapasitesi() { return depolamaKapasitesi; }
-    public int getPilSagligi() { return pilSagligi; }
-    public int getCihazYasiAy() { return cihazYasiAy; }
-    public boolean isGarantisiVarMi() { return garantisiVarMi; }
-    public boolean isKutuFaturaVarMi() { return kutuFaturaVarMi; }
-    public boolean isKozmetikHasarVarMi() { return kozmetikHasarVarMi; }
-    public boolean isTamirGorduMu() { return tamirGorduMu; }
-    public boolean isImeiKaydiVarMi() { return imeiKaydiVarMi; }
-
     @Override
-    public void tahminiDegerHesapla() {
-        // Hesaplama sorumluluğu PhonePricingEngine'de.
-    }
+    public void tahminiDegerHesapla() {}
+
+    public boolean isImeiKaydiVarMi() { return imeiKaydiVarMi; }
+    public void setImeiKaydiVarMi(boolean imeiKaydiVarMi) { this.imeiKaydiVarMi = imeiKaydiVarMi; }
+    public String getMarka() { return marka; }
+    public void setMarka(String marka) { this.marka = marka; }
+    public String getModel() { return model; }
+    public void setModel(String model) { this.model = model; }
+    public int getDepolamaKapasitesi() { return depolamaKapasitesi; }
+    public void setDepolamaKapasitesi(int depolamaKapasitesi) { this.depolamaKapasitesi = depolamaKapasitesi; }
+    public int getPilSagligi() { return pilSagligi; }
+    public void setPilSagligi(int pilSagligi) { this.pilSagligi = pilSagligi; }
+    public int getCihazYasiAy() { return cihazYasiAy; }
+    public void setCihazYasiAy(int cihazYasiAy) { this.cihazYasiAy = cihazYasiAy; }
+    public boolean isGarantisiVarMi() { return garantisiVarMi; }
+    public void setGarantisiVarMi(boolean garantisiVarMi) { this.garantisiVarMi = garantisiVarMi; }
+    public boolean isKutuFaturaVarMi() { return kutuFaturaVarMi; }
+    public void setKutuFaturaVarMi(boolean kutuFaturaVarMi) { this.kutuFaturaVarMi = kutuFaturaVarMi; }
+    public boolean isKozmetikHasarVarMi() { return kozmetikHasarVarMi; }
+    public void setKozmetikHasarVarMi(boolean kozmetikHasarVarMi) { this.kozmetikHasarVarMi = kozmetikHasarVarMi; }
+    public boolean isTamirGorduMu() { return tamirGorduMu; }
+    public void setTamirGorduMu(boolean tamirGorduMu) { this.tamirGorduMu = tamirGorduMu; }
+    public double getEkranBoyutuInc() { return ekranBoyutuInc; }
+    public void setEkranBoyutuInc(double ekranBoyutuInc) { this.ekranBoyutuInc = ekranBoyutuInc; }
+    public int getArkaKameraMP() { return arkaKameraMP; }
+    public void setArkaKameraMP(int arkaKameraMP) { this.arkaKameraMP = arkaKameraMP; }
+    public int getOnKameraMP() { return onKameraMP; }
+    public void setOnKameraMP(int onKameraMP) { this.onKameraMP = onKameraMP; }
 }

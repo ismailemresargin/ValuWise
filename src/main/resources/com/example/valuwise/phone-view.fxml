@@ -3,63 +3,148 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
 
-<ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.valuwise.HelloController">
-    <VBox spacing="20.0">
-        <padding><Insets bottom="20.0" left="30.0" right="30.0" top="20.0" /></padding>
-        <children>
-            <Label text="Telefon Değeri Hesaplama İçin Veri Girişi" textFill="#2c3e50"><font><Font name="System Bold" size="18.0" /></font></Label>
-            <GridPane hgap="15.0" vgap="15.0">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="170.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="250.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="20.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="170.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="250.0" />
-                </columnConstraints>
-                <children>
-                    <Label text="Marka:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="phoneBrandField" promptText="iPhone, Samsung vb." GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <Label text="Model:" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-                    <TextField fx:id="phoneModelField" promptText="15 Pro Max" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+<VBox xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.valuwise.controller.PhoneController">
 
-                    <Label text="Depolama:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <TextField fx:id="phoneStorageField" promptText="128 GB" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Label text="Kutusu/Faturası Var mı:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                    <TextField fx:id="phoneKFField" promptText="8 GB" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+    <!-- ÜST: Form + Sonuç alanı yan yana -->
+    <HBox spacing="15.0" VBox.vgrow="ALWAYS">
+        <padding><Insets top="0" left="0" right="0" bottom="0" /></padding>
 
-                    <Label text="Pil Sağlığı:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <TextField fx:id="phoneBatteryField" promptText="\%90" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <Label text="Garanti:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                    <TextField fx:id="phoneWarrantyField" promptText="12 Ay" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+        <!-- SOL: Form -->
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+        <VBox spacing="18.0">
+            <padding><Insets bottom="15.0" left="25.0" right="15.0" top="15.0" /></padding>
+            <children>
 
-                    <Label text="İmei Kaydı Var mı:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <TextField fx:id="phoneKayitField" promptText="Var/Yok" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                    <Label text="Kozmetik Hasar Durumu:" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                    <TextField fx:id="phoneCosmeticField" promptText="Sıfır Ayarında" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                <Label text="Telefon Değeri Hesaplama" textFill="#2c3e50">
+                    <font><Font name="System Bold" size="16.0" /></font>
+                </Label>
 
-                    <Label text="Cihaz Yaşı:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                    <TextField fx:id="phoneYasField" promptText="Ay olarak Giriniz" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                    <Label text="Tamir Gördü mü:" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                    <TextField fx:id="phoneTamirField" promptText="Ön Kamera Değişti" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                <GridPane hgap="12.0" vgap="12.0">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="155.0" />
+                        <ColumnConstraints hgrow="ALWAYS" prefWidth="220.0" />
+                        <ColumnConstraints prefWidth="20.0" />
+                        <ColumnConstraints prefWidth="155.0" />
+                        <ColumnConstraints hgrow="ALWAYS" prefWidth="220.0" />
+                    </columnConstraints>
+                    <children>
+                        <!-- Marka / Model -->
+                        <Label text="Marka:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <ComboBox fx:id="markaComboBox" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Label text="Model:" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                        <ComboBox fx:id="modelComboBox" prefWidth="220.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
 
-                    <Label text="Ekran Boyutu:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                    <TextField fx:id="phoneEkranField" promptText="INC Cinsinden Yazın" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                    <Label text="Arka Kamera Kaç MP:" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                    <TextField fx:id="phoneArkaCamField" promptText="MP Cinsinden Yazın" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                        <!-- Depolama / Yaş -->
+                        <Label text="Depolama:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="depolamaComboBox" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Cihaz Yaşı (Ay):" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <TextField fx:id="cihazYasiField" promptText="Örn: 18" GridPane.columnIndex="4" GridPane.rowIndex="1" />
 
-                    <Label text="Ön Kamera Kaç MP:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                    <TextField fx:id="phoneOnCamField" promptText="MP Cinsinden Yazın" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                </children>
-            </GridPane>
-            <Separator prefWidth="200.0" />
-            <HBox alignment="CENTER" spacing="15.0">
-                <children>
-                    <Button fx:id="calculateButton3" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-background-radius: 8;" text="TELEFON DEĞERİ HESAPLA"><font><Font name="System Bold" size="14.0" /></font></Button>
-                    <Button fx:id="clearButton3" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #bdc3c7; -fx-text-fill: #2c3e50; -fx-background-radius: 8;" text="FORMU SIFIRLA" />
-                </children>
-            </HBox>
-            <Label fx:id="phoneResultLabel" alignment="CENTER" maxWidth="Infinity" text="Tahmini Değer: -- ₺" textFill="#d35400"><font><Font name="System Bold" size="20.0" /></font></Label>
-        </children>
-    </VBox>
-</ScrollPane>
+                        <!-- Pil -->
+                        <Label text="Pil Sağlığı:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <HBox spacing="8.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <Slider fx:id="pilSagligiSlider" min="50" max="100" value="90" prefWidth="170.0"
+                                showTickLabels="true" showTickMarks="true" majorTickUnit="10" />
+                            <Label fx:id="pilSagligiLabel" text="90%" style="-fx-font-weight: bold; -fx-text-fill: #27ae60;" minWidth="40.0" />
+                        </HBox>
+
+                        <!-- Kamera -->
+                        <Label text="Arka Kamera (MP):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <Label fx:id="arkaKameraLabel" text="—" style="-fx-font-weight: bold; -fx-text-fill: #2980b9;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Ön Kamera (MP):" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <Label fx:id="onKameraLabel" text="—" style="-fx-font-weight: bold; -fx-text-fill: #2980b9;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+
+                        <!-- Ekran -->
+                        <Label text="Ekran Boyutu:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <Label fx:id="ekranBoyutuLabel" text="—" style="-fx-font-weight: bold; -fx-text-fill: #2980b9;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                        <!-- Garanti -->
+                        <Label text="Garanti:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <HBox spacing="8.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5">
+                            <CheckBox fx:id="garantiCheck" text="Garantisi Var" />
+                            <ComboBox fx:id="garantiAyComboBox" promptText="Kalan Süre" prefWidth="150.0" disable="true" />
+                        </HBox>
+
+                        <!-- Ekstra -->
+                        <Label text="Ekstra:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                        <HBox spacing="12.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="6">
+                            <CheckBox fx:id="kutuFaturaCheck" text="Kutu / Fatura Var" />
+                            <CheckBox fx:id="imeiCheck" text="İMEİ Kaydı Var" selected="true" />
+                            <CheckBox fx:id="besGCheck" text="5G Destekli" />
+                            <CheckBox fx:id="hizliSarjCheck" text="Hızlı Şarj 45W+" />
+                        </HBox>
+
+                        <!-- Hasar -->
+                        <Label text="Hasar / Tamir:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                        <CheckComboBox fx:id="hasarTamirComboBox" prefWidth="320.0"
+                            GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="7" />
+                    </children>
+                    <rowConstraints>
+                        <RowConstraints minHeight="35.0" />
+                        <RowConstraints minHeight="35.0" />
+                        <RowConstraints minHeight="40.0" />
+                        <RowConstraints minHeight="35.0" />
+                        <RowConstraints minHeight="35.0" />
+                        <RowConstraints minHeight="40.0" />
+                        <RowConstraints minHeight="40.0" />
+                        <RowConstraints minHeight="40.0" />
+                    </rowConstraints>
+                </GridPane>
+
+            </children>
+        </VBox>
+        </ScrollPane>
+
+        <!-- SAĞ: Sonuç + Faktör Özeti + Geçmiş -->
+        <VBox spacing="10.0" prefWidth="280.0" style="-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-width: 0 0 0 1;">
+            <padding><Insets top="15.0" left="15.0" right="15.0" bottom="15.0" /></padding>
+
+            <Label text="Sonuç" style="-fx-font-weight: bold; -fx-font-size: 13px;" />
+            <Separator />
+
+            <Label fx:id="phoneResultLabel" text="Tahmini Değer: -- ₺"
+                   textFill="#e67e22" wrapText="true">
+                <font><Font name="System Bold" size="16.0" /></font>
+            </Label>
+
+            <Label fx:id="fiyatAraligLabel" text="Piyasa Aralığı: -- ₺  —  -- ₺"
+                   textFill="#7f8c8d" wrapText="true" style="-fx-font-size: 11px;" />
+
+            <Separator />
+            <Label text="Faktör Özeti" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+            <TextArea fx:id="faktorOzetArea" editable="false" wrapText="true"
+                      prefHeight="160.0" style="-fx-font-size: 11px; -fx-control-inner-background: #ffffff;" />
+
+            <Separator />
+            <Label text="Geçmiş Sorgular" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+            <ListView fx:id="gecmisListView" prefHeight="120.0" style="-fx-font-size: 10px;" />
+
+        </VBox>
+    </HBox>
+
+    <Separator />
+
+    <!-- BUTONLAR -->
+    <HBox alignment="CENTER" spacing="12.0" style="-fx-padding: 8 25 10 25;">
+        <Button fx:id="calculateButton3" defaultButton="true" onAction="#onCalculateButtonClick"
+                prefHeight="42.0" prefWidth="220.0"
+                style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-background-radius: 8;"
+                text="TELEFON DEĞERİ HESAPLA">
+            <font><Font name="System Bold" size="13.0" /></font>
+        </Button>
+        <Button onAction="#onPdfSaveButtonClick"
+                prefHeight="42.0" prefWidth="160.0"
+                style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-background-radius: 8;"
+                text="PDF KAYDET">
+            <font><Font name="System Bold" size="13.0" /></font>
+        </Button>
+        <Button fx:id="clearButton3" onAction="#onClearButtonClick"
+                prefHeight="42.0" prefWidth="110.0"
+                style="-fx-background-color: #bdc3c7; -fx-text-fill: #2c3e50; -fx-background-radius: 8;"
+                text="SIFIRLA" />
+    </HBox>
+
+</VBox>
