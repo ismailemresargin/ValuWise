@@ -151,11 +151,14 @@ public class PcController {
             // Yaş: "5+" gibi metinlerden sayıyı al
             int cihazYasi = Integer.parseInt(pcCihazYasiCombo.getValue().replace("+", ""));
 
-            // Nesil: "13. Nesil" -> 13 (Apple ise 0)
+            // Nesil çevirici ("13. Nesil" -> 13, "Ryzen 8000/7000" -> 8000)
             int nesil = 0;
             String nesilStr = pcIslemciNesliCombo.getValue();
-            if (nesilStr.matches(".*\\d.*")) { // İçinde sayı varsa
-                nesil = Integer.parseInt(nesilStr.replaceAll("[^0-9]", ""));
+            if (nesilStr != null && nesilStr.matches(".*\\d.*")) {
+                java.util.regex.Matcher m = java.util.regex.Pattern.compile("\\d+").matcher(nesilStr);
+                if (m.find()) {
+                    nesil = Integer.parseInt(m.group());
+                }
             }
 
             // Ekran Boyutu: "15.6 inç" -> 15.6
