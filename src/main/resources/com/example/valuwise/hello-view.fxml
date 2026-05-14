@@ -24,7 +24,7 @@
                 <Pane fx:id="bannerPane" prefHeight="215.0" prefWidth="500" BorderPane.alignment="CENTER" />
             </top>
             <center>
-                <TabPane style="-fx-background-color: #ffffff;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                <TabPane fx:id="mainTabPane" style="-fx-background-color: #ffffff;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                     <tabs>
                         <Tab text="Araba Değerle">
                             <content>
@@ -48,9 +48,13 @@
 
                         <Tab text="Telefon Değerle">
                             <content>
-
                                     <fx:include source="phone-view.fxml" />
+                            </content>
+                        </Tab>
 
+                        <Tab fx:id="karsilastirTab" text="Telefon Karşılaştır" style="-fx-font-size: 0; -fx-padding: 0; -fx-min-width: 0; -fx-max-width: 0; -fx-pref-width: 0;" disable="true">
+                            <content>
+                                    <fx:include source="phone-compare-view.fxml" />
                             </content>
                         </Tab>
                     </tabs>

@@ -141,6 +141,12 @@
                 text="PDF KAYDET">
             <font><Font name="System Bold" size="13.0" /></font>
         </Button>
+        <Button onAction="#onKarsilastirGitButtonClick"
+                prefHeight="42.0" prefWidth="190.0"
+                style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-background-radius: 8;"
+                text="📱 TELEFONLARI KARŞILAŞTIR">
+            <font><Font name="System Bold" size="12.0" /></font>
+        </Button>
         <Button fx:id="clearButton3" onAction="#onClearButtonClick"
                 prefHeight="42.0" prefWidth="110.0"
                 style="-fx-background-color: #bdc3c7; -fx-text-fill: #2c3e50; -fx-background-radius: 8;"

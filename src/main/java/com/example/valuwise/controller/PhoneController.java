@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.ObservableList;
 import javafx.stage.FileChooser;
+import com.example.valuwise.HelloController;
 import javafx.scene.control.Alert;
 import java.io.File;
 import java.time.LocalDateTime;
@@ -422,6 +423,13 @@ public class PhoneController {
     private int parseMP(String text) {
         try { return Integer.parseInt(text.replace(" MP", "").trim()); }
         catch (Exception e) { return 12; }
+    }
+
+    @FXML
+    protected void onKarsilastirGitButtonClick() {
+        if (HelloController.instance != null) {
+            HelloController.instance.karsilastirTabineGit();
+        }
     }
 
     @FXML
